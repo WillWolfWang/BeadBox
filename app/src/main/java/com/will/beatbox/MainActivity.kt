@@ -20,6 +20,8 @@ import com.will.beatbox.databinding.ListItemSoundBinding
 import com.will.beatbox.ui.theme.BeatBoxTheme
 
 class MainActivity : ComponentActivity() {
+
+    private lateinit var beatBox: BeatBox
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // 使用 DataBindingUtil 类创建 ActivityMainBinding 对象
@@ -30,6 +32,8 @@ class MainActivity : ComponentActivity() {
             adapter = SoundAdapter()
         }
 
+        beatBox = BeatBox(assets)
+        beatBox.loadSound()
     }
 
     // ViewHolder 类，super 类需要使用 view，所以要传 binding.root
