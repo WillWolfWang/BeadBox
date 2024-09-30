@@ -2,8 +2,34 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.will.beatbox.viewmodel.SoundViewModel" />
+    </data>
+    <!--在绑定类上定义了一个名为 viewModel 的属性，同时还包括 getter 和 setter 方法-->
+    <!--
+    1. <data> 标签：
+        这个标签在数据绑定布局文件中定义了可以在布局中使用的变量。
+        它通常位于布局文件的根元素内，但在其他视图元素之前。
+    2. <variable> 标签：
+        在 <data> 标签内，我们可以定义一个或多个 <variable> 标签。
+        每个 <variable> 标签声明了一个可以在布局中使用的变量。
+    3. name="viewModel"：
+        这定义了变量的名称。在这个例子中，变量名是 "viewModel"。
+        这个名称可以在布局文件的其他部分中使用，以引用这个变量。
+    4. type="com.will.beatbox.viewmodel.SoundViewModel"：
+        这指定了变量的类型。
+        在这个例子中，类型是 com.will.beatbox.viewmodel.SoundViewModel，这可能是一个自定义的 ViewModel 类。
+    -->
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="120dp"
+        android:text="@{viewModel.title}"
         tools:text="Sound name"/>
+    <!--使用方法，定义的 name 调用对应类拥有的属性
+        在绑定的大括号里面，可以写一些简单的 Java 表达式，
+        如链式函数调用，数学计算等
+    -->
 </layout>
