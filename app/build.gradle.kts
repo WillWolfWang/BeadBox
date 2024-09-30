@@ -65,7 +65,10 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.recyclerview)
     implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.core.testing)
     testImplementation(libs.junit)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockito.inline) // testImplementation 的意思是，只包含在应用的测试编译里
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
