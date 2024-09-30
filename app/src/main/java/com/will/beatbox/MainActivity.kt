@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
 
         // apply 函数会一起执行
         binding.recyclerView.apply {
-            layoutManager = GridLayoutManager(context, 1)
+            layoutManager = GridLayoutManager(context, 3)
             adapter = SoundAdapter(beatBox.sounds)
         }
 

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimary_Dark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!--样式需要逐个为所有部件添加它们要用到的样式，如果有很多部件和按钮，光是添加样式工作量就很惊人了-->
+    <style name="BeatBoxButton">
+        <item name="android:background">@color/dark_blue</item>
+    </style>
+
+    <style name="BeatBoxButton.Strong" parent="BeatBoxButton">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+</resources>
