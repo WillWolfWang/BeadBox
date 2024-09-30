@@ -7,15 +7,29 @@ private const val TAG = "BeatBox"
 private const val SOUNDS_FOLDER = "sample_sounds"
 // AssetManager 类可以访问 assets 下的资源
 class BeatBox(private val assets: AssetManager) {
+    val sounds: List<Sound>
 
+    // init 方法位于主构造器之后，从构造器之前执行， 创建了对象后， init 函数就执行了
+    init {
+        sounds = loadSound()
+    }
 
-    fun loadSound(): List<String> {
+    private fun loadSound(): List<Sound> {
+        // 这里传入相对路径
         val soundNames = assets.list(SOUNDS_FOLDER)
         if (soundNames.isNullOrEmpty()) {
             return emptyList()
         } else {
-            Log.e("WillWolf", "found ${soundNames.size} sounds")
-            return soundNames.asList()
+//            Log.e("WillWolf", "found ${soundNames.size} sounds")
+            val sounds = mutableListOf<Sound>()
+            // 获取到所有的文件名
+            soundNames.forEach {fileName ->
+                //拼装文件路径
+                val assetPath = "$SOUNDS_FOLDER/$fileName"
+                val sound = Sound(assetPath)
+                sounds.add(sound)
+            }
+            return sounds
         }
     }
 }
