@@ -47,7 +47,7 @@ class MainActivity : ComponentActivity() {
             binding.viewModel = SoundViewModel()
         }
         // 绑定方法中更新视图需要的数据
-        fun bind(sound: Sound) {
+        fun bind(sound: Sound?) {
             binding.apply {
                 viewModel?.sound = sound
                 // 它的主要作用是立即执行所有待处理的数据绑定操作。
@@ -70,7 +70,7 @@ class MainActivity : ComponentActivity() {
     }
 
     // RecycleView 的 adapter 类
-    private inner class SoundAdapter(private val sounds: List<Sound>): RecyclerView.Adapter<SoundHolder>() {
+    private inner class SoundAdapter(private val sounds: List<Sound?>): RecyclerView.Adapter<SoundHolder>() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SoundHolder {
             val binding: ListItemSoundBinding = DataBindingUtil.inflate<ListItemSoundBinding>(layoutInflater, R.layout.list_item_sound, parent, false)
             return SoundHolder(binding)

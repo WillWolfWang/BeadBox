@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    kotlin("kapt") // 使用 databing 需要配置该行，否则会报错，databing 找不到对应的注解属性
 }
 
 android {
