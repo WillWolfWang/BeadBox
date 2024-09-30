@@ -25,12 +25,10 @@
     -->
 
     <Button
-        style="@style/BeatBoxButton.Strong"
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:text="@{`File name:` + viewModel.title?? `No file`}"
         android:onClick="@{(view)->viewModel.onButtonClick()}"
-        app:isGone="@{false}"
         tools:text="Sound name"/>
     <!--使用方法，定义的 name 调用对应类拥有的属性
         在绑定的大括号里面，可以写一些简单的 Java 表达式，
@@ -42,4 +40,6 @@
     <!--绑定表达式也有一个 null 值合并操作符 ??-->
 
     <!--使用 dateBinding 相关属性，设定值的时候，必须用 @{} 的方式-->
+
+    <!-- 使用自己声明的 BindingAdapter 值 app:isGone="@{false}" -->
 </layout>

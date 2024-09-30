@@ -2,5 +2,26 @@
 <resources>
 
     <style name="Theme.BeatBox" parent="android:Theme.Material.Light.NoActionBar" />
-    <style name="MyTheme" parent="Theme.AppCompat.Light.NoActionBar"/>
+    <style name="MyTheme" parent="Theme.AppCompat">
+        <item name="colorPrimary">@color/red</item>
+        <!--colorPrimary 主要应用于应用栏，由于应用名称是显示在应用栏上，所以 colorPrimary 也可以
+        称为应用品牌色-->
+        <item name="colorPrimaryDark">@color/dark_red</item>
+        <!--colorPrimaryDark 用于屏幕顶部的状态栏，Wi-Fi 图标，电量那一行处-->
+        <item name="colorAccent">@color/gray</item>
+        <!-- colorAccent 这个主题色应该和 colorPrimary 成反差效果，主要用于给
+                EditText 这样的部件着色
+                Button 不支持着色，但还是添加最好-->
+        <!--这个属性是来自 Android 操作系统的，所以要加 android 命名空间-->
+        <!--通过一直追溯 themes 源，找到根 themes，然后查看需要改动的属性-->
+        <item name="android:windowBackground">@color/soothing_blue</item>
+
+        <!--通过覆盖 主题 中的 buttonStyle，就可以直接改变所有普通按钮的样子-->
+        <item name="buttonStyle">@style/BeatBoxButton</item>
+    </style>
+    <!--AppCompat 库自带三大主题，Theme.AppCompat 深色主题
+     Theme.AppCompat.Light 浅色主题
+     Theme.AppCompat.Light.DarkActionBar 带深色工具栏的浅色主题
+     -->
+
 </resources>

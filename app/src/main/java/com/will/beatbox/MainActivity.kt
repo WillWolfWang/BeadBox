@@ -1,11 +1,14 @@
 package com.will.beatbox
 
+import android.content.res.Resources
+import android.content.res.TypedArray
 import android.os.Bundle
 import android.util.Log
 import android.view.ViewGroup
 import androidx.activity.ComponentActivity
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.ui.graphics.Color
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -22,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var beatBox: BeatBox
     private lateinit var viewModel: MainViewModel
 
+    @OptIn(ExperimentalStdlibApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // 使用 DataBindingUtil 类创建 ActivityMainBinding 对象
@@ -50,6 +54,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         onBackPressedDispatcher.addCallback(this, callback)
+
+
+//        var  attrsToFetch = intArrayOf(androidx.appcompat.R.attr.colorAccent)
+//        val a: TypedArray = theme.obtainStyledAttributes(R.style.MyTheme, attrsToFetch)
+//        val accentColor = a.getInt(0, 0)
+//        Log.e("WillWolf", "accentColor:" + accentColor.toHexString())
+//        a.recycle()
     }
 
     override fun onDestroy() {
