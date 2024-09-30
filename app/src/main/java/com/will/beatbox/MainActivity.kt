@@ -7,6 +7,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.will.beatbox.databinding.ActivityMainBinding
@@ -19,6 +20,8 @@ import com.will.beatbox.viewmodel.SoundViewModel
 class MainActivity : AppCompatActivity() {
 
     private lateinit var beatBox: BeatBox
+    private lateinit var viewModel: MainViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // 使用 DataBindingUtil 类创建 ActivityMainBinding 对象
@@ -26,8 +29,12 @@ class MainActivity : AppCompatActivity() {
             DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         // 这个要放在 recyclerView apply 的前面
-        beatBox = BeatBox(assets)
-        binding.viewModel = MainViewModel(beatBox)
+//        beatBox = BeatBox(assets)
+
+        val factory = MainViewModel.MainViewModeFactory(assets)
+        viewModel = ViewModelProvider(this, factory).get(MainViewModel::class.java)
+        binding.viewModel = viewModel
+        beatBox = viewModel.beatBox
 
         // apply 函数会一起执行
         binding.recyclerView.apply {
@@ -48,7 +55,6 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         Log.e("WillWolf", "onDestroy-->")
-        beatBox.release()
     }
 
     private fun shareFile() {
