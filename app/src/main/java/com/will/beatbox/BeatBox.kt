@@ -66,15 +66,30 @@ class BeatBox(private val assets: AssetManager) {
         val soundId = soundPool.load(afd, 1)
         sound.soundId = soundId
     }
+
+    var soundId: Int? = null
     // 播放音频
     fun play(sound: Sound) {
         sound.soundId?.let {
             Log.e("WillWolf", "soundId-->" + it)
-            soundPool.play(it, 1f, 1f, 1, 0, 1f)
+            soundId = it
+            soundPool.play(it, 1f, 1f, 1, 0, currentRate)
+
+//            soundPool.setRate(it, 2f)
             if (!playSoundSet.contains(it)) {
                 playSoundSet.add(it)
             }
         }
+    }
+
+    var currentRate = 1.0f
+    fun updateRate(rate: Float) {
+        Log.e("WillWolf", "updateRate-->" + soundId + ", " + rate)
+        currentRate = rate
+        // 播放后，修改 rate 不生效
+//        if (soundId != null) {
+//            soundPool.setRate(soundId!!, rate)
+//        }
     }
 
     //

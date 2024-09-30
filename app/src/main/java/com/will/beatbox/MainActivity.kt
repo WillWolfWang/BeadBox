@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.will.beatbox.databinding.ActivityMainBinding
 import com.will.beatbox.databinding.ListItemSoundBinding
 import com.will.beatbox.manager.FileShareManager
+import com.will.beatbox.viewmodel.MainViewModel
 import com.will.beatbox.viewmodel.SoundViewModel
 // 如果继承 ComponentActivity，会发现给 dateBinding 设置 lifecycleOwner 时，会报错
 // 需要改用 AppCompatActivity
@@ -26,6 +27,8 @@ class MainActivity : AppCompatActivity() {
 
         // 这个要放在 recyclerView apply 的前面
         beatBox = BeatBox(assets)
+        binding.viewModel = MainViewModel(beatBox)
+
         // apply 函数会一起执行
         binding.recyclerView.apply {
             layoutManager = GridLayoutManager(context, 1)
@@ -62,6 +65,7 @@ class MainActivity : AppCompatActivity() {
         // 关联使用视图模型，创建一个 SoundViewModel，把它添加给绑定类
         init {
             binding.viewModel = SoundViewModel(beatBox)
+//            Log.e("willWolf", "SoundHolder--init")
         }
         // 绑定方法中更新视图需要的数据
         fun bind(sound: Sound?) {

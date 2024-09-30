@@ -3,6 +3,7 @@ package com.will.beatbox.viewmodel
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.SeekBar
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
 import androidx.databinding.BindingAdapter
