@@ -7,9 +7,10 @@ import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
+import com.will.beatbox.BeatBox
 import com.will.beatbox.Sound
 
-class SoundViewModel {
+class SoundViewModel(private val beatBox: BeatBox) {
     val title: MutableLiveData<String?> = MutableLiveData<String?>()
     // 声明为 var，应该就直接有 set 方法了
     var sound: Sound? = null
@@ -31,7 +32,10 @@ class SoundViewModel {
 
     // 可以使用 dateBinding 设置监听事件
     fun onButtonClick() {
-        Log.e("WillWolf", "onButtonClick-->")
+//        Log.e("WillWolf", "onButtonClick-->")
+        sound?.let {
+            beatBox.play(it)
+        }
     }
 
     // 配合下面的 bindingAdapter 使用
@@ -46,7 +50,7 @@ object MyBindAdapter {
     @JvmStatic
     @BindingAdapter("app:isGone")
     fun bindIsGone(button: Button, isGone: Boolean) {
-        Log.e("WillWolf", "bindIsGone" + isGone)
+//        Log.e("WillWolf", "bindIsGone" + isGone)
         button.visibility = if (isGone) View.GONE else View.VISIBLE
     }
 }

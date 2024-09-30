@@ -13,12 +13,18 @@ private const val MAX_SOUNDS = 5
 class BeatBox(private val assets: AssetManager) {
     val sounds: List<Sound?>
     //
+    val playSoundSet = hashSetOf<Int>()
     private val soundPool: SoundPool = SoundPool.Builder()
         .setMaxStreams(MAX_SOUNDS)// 指定某个时刻同时播放多少个音频，如果尝试播放第 6 个，SoundPool 会停止播放最早播放的那个
         .build()
     // init 方法位于主构造器之后，从构造器之前执行， 创建了对象后， init 函数就执行了
     init {
         sounds = loadSound()
+        soundPool.setOnLoadCompleteListener { soundPool, sampleId, status ->
+            if (playSoundSet.contains(sampleId)) {
+                playSoundSet.remove(sampleId)
+            }
+        }
     }
 
     // 将 assets 下的文件全都加到缓存集合中
@@ -63,7 +69,20 @@ class BeatBox(private val assets: AssetManager) {
     // 播放音频
     fun play(sound: Sound) {
         sound.soundId?.let {
+            Log.e("WillWolf", "soundId-->" + it)
             soundPool.play(it, 1f, 1f, 1, 0, 1f)
+            if (!playSoundSet.contains(it)) {
+                playSoundSet.add(it)
+            }
         }
+    }
+
+    //
+    fun release() {
+        playSoundSet.forEach {
+            Log.e("WillWolf", "release id -->" + it)
+            soundPool.stop(it)
+        }
+        soundPool.release()
     }
 }

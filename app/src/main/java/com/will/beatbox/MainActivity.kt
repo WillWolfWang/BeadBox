@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.ViewGroup
 import androidx.activity.ComponentActivity
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
@@ -31,6 +32,20 @@ class MainActivity : AppCompatActivity() {
             adapter = SoundAdapter(beatBox.sounds)
         }
 
+
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                finish()
+            }
+        }
+
+        onBackPressedDispatcher.addCallback(this, callback)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.e("WillWolf", "onDestroy-->")
+        beatBox.release()
     }
 
     private fun shareFile() {
@@ -46,7 +61,7 @@ class MainActivity : AppCompatActivity() {
     private inner class SoundHolder(private var binding: ListItemSoundBinding): RecyclerView.ViewHolder(binding.root) {
         // 关联使用视图模型，创建一个 SoundViewModel，把它添加给绑定类
         init {
-            binding.viewModel = SoundViewModel()
+            binding.viewModel = SoundViewModel(beatBox)
         }
         // 绑定方法中更新视图需要的数据
         fun bind(sound: Sound?) {
