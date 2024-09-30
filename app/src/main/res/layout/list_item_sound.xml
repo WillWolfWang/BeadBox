@@ -24,12 +24,24 @@
         在这个例子中，类型是 com.will.beatbox.viewmodel.SoundViewModel，这可能是一个自定义的 ViewModel 类。
     -->
 
-    <Button
+    <!--外面封装一层 frame 布局，当需要拉伸适配屏幕时，frame 会被拉伸，而按钮不会-->
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:text="@{`File name:` + viewModel.title?? `No file`}"
-        android:onClick="@{(view)->viewModel.onButtonClick()}"
-        tools:text="Sound name"/>
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp">
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:text="@{`File name:` + viewModel.title?? `No file`}"
+            android:onClick="@{(view)->viewModel.onButtonClick()}"
+            tools:text="Sound name"/>
+
+    </FrameLayout>
+
+
     <!--使用方法，定义的 name 调用对应类拥有的属性
         在绑定的大括号里面，可以写一些简单的 Java 表达式，
         如链式函数调用，数学计算等
