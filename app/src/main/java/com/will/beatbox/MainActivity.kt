@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.ViewGroup
 import androidx.activity.ComponentActivity
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -11,8 +12,9 @@ import com.will.beatbox.databinding.ActivityMainBinding
 import com.will.beatbox.databinding.ListItemSoundBinding
 import com.will.beatbox.manager.FileShareManager
 import com.will.beatbox.viewmodel.SoundViewModel
-
-class MainActivity : ComponentActivity() {
+// 如果继承 ComponentActivity，会发现给 dateBinding 设置 lifecycleOwner 时，会报错
+// 需要改用 AppCompatActivity
+class MainActivity : AppCompatActivity() {
 
     private lateinit var beatBox: BeatBox
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -73,6 +75,10 @@ class MainActivity : ComponentActivity() {
     private inner class SoundAdapter(private val sounds: List<Sound?>): RecyclerView.Adapter<SoundHolder>() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SoundHolder {
             val binding: ListItemSoundBinding = DataBindingUtil.inflate<ListItemSoundBinding>(layoutInflater, R.layout.list_item_sound, parent, false)
+            // 使用 liveData 替换 dataBing 的 BaseObservable 时，需要指定 binging 的 lifecycleOwner 对象
+            // 只要 title 属性有变化， MainActivity 视图就变化
+            binding.lifecycleOwner = this@MainActivity
+
             return SoundHolder(binding)
         }
 
