@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <files-path name="my_images" path="images/"/>
+    <files-path name="my_docs" path="documents/"/>
+
+    <!--
+    <files-path> 标签：
+        这个标签表示我们正在定义一个位于应用内部存储的 "files" 目录中的路径。
+        这个目录对应于 Context.getFilesDir() 方法返回的目录。
+
+
+    ame="my_images" 属性：
+    这是一个你为这个路径定义的别名。
+    在使用 FileProvider 生成 URI 时，这个名称会被用作路径的一部分。
+    这个名称可以是任意的，但应该是描述性的，以便于理解其用途。
+
+    path="images/" 属性：
+    这定义了相对于 Context.getFilesDir() 的子目录路径。
+    在这个例子中，它指向 getFilesDir() 下的 "images" 子目录。
+
+    这行配置实际上创建了一个映射，将 "my_images" 别名映射到应用内部存储的 getFilesDir()/images/ 目录。
+
+    假设你的应用包名是 com.example.app，那么：
+    物理路径可能是：/data/data/com.example.app/files/images/
+    通过 FileProvider 生成的 URI 可能看起来像：
+    content://com.example.app.fileprovider/my_images/picture.jpg
+    -->
+
+</paths>
